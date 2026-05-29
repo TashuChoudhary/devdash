@@ -1,0 +1,4 @@
+.git
+node_modules
+devdash-ui/node_modules
+*.md

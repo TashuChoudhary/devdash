@@ -44,10 +44,12 @@ func instrument(path string, h http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, `{"status":"ok","service":"devdash-app"}`)
+}
+
 func main() {
-	http.HandleFunc("/health", instrument("/health", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, `{"status":"ok","service":"devdash-app"}`)
-	}))
+	http.HandleFunc("/health", instrument("/health", healthHandler))
 
 	http.HandleFunc("/", instrument("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "DevDash app is running")
