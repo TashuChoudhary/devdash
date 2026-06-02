@@ -45,6 +45,8 @@ func instrument(path string, h http.HandlerFunc) http.HandlerFunc {
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintln(w, `{"status":"ok","service":"devdash-app"}`)
 }
 
@@ -55,7 +57,7 @@ func main() {
 		fmt.Fprintln(w, "DevDash app is running")
 	}))
 
-	// This is the magic endpoint — Prometheus scrapes this
+	// This is the magic endpoint - Prometheus scrapes this
 	http.Handle("/metrics", promhttp.Handler())
 
 	log.Println("Server starting on :8080")
