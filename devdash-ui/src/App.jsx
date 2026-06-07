@@ -41,7 +41,7 @@ const C = {
   red:       "#f87171",
 };
 
-/* ── live dot ── */
+/* live dot */
 function LiveDot({ on }) {
   return (
     <span style={{ position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center", width: 10, height: 10 }}>
